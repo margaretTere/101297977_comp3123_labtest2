@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SearchCity from './components/search-city-component';
+import Weatherboard from './components/weatherboard-component';
+import CFG from './config'
 
 function App() {
+  const [weather, setWeather] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path={CFG.searchCity} element={<SearchCity setWeather={setWeather}/>} />
+        <Route path={CFG.viewWeatherBoard} element={<Weatherboard weather={weather}/>} />
+      </Routes>
+    </Router>
   );
 }
 
